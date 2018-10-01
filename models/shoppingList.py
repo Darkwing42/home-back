@@ -6,7 +6,7 @@ class Item(EmbeddedDocument):
 	name = StringField(max_length=200)
 	quantity = IntField(min_value=0)
 	done = BooleanField(default=False)
-	
+
 	def to_dict(self):
 		template = {
 			"name": self.name,
@@ -27,5 +27,5 @@ class ShoppingList(Document):
 			"done": self.done,
 			"created_at": self.created_at.strftime('%d-%m-%Y'),
 			"items": [ item.to_dict() for item in self.items ]
-		}	
+		}
 		return template
