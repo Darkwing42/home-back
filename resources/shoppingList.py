@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from mongoengine import *
+from home_back import db
 from home_back.models.shoppingList import ShoppingList, Item
 
 class ShoppingList(Resource):

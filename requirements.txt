@@ -1,5 +1,6 @@
 flask
 flask-restful
-mongoengine
+flask-SQLAlchemy
+flas-migrate
 flask-cors
 flask-jwt

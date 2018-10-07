@@ -1,15 +1,19 @@
 from flask import Flask
 from flask_restful import Api
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 #from flask_cors import CORS
 from flask_jwt import JWT
-import home_back.database.mongo_setup as mongo_setup
 
-mongo_setup.global_init()
+
 app = Flask(__name__)
+app.config.from_object('home_back.config.BaseConfig')
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 api = Api(app)
 
 
-app.secret_key = "Lolol lol ich bin ein secret key"
+
 #TODO: Generate secret key
 
 #import Resources
