@@ -1,6 +1,7 @@
 flask
 flask-restful
 flask-SQLAlchemy
-flas-migrate
+flask-migrate
+requests
 flask-cors
 flask-jwt

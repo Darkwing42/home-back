@@ -17,8 +17,9 @@ api = Api(app)
 #TODO: Generate secret key
 
 #import Resources
-from home_back.resources.shoppingList import ShoppingList, ShoppingItem
 
+from home_back.resources.weather import Weather, WeatherPrefs
 url_prefix = "/api/v1"
 
-api.add_resource(ShoppingList, url_prefix + '/shoppinglists')
+api.add_resource(Weather, url_prefix + '/weather', url_prefix + '/weather/<string:city_name>')
+api.add_resource(WeatherPrefs, url_prefix + '/weather/config')
