@@ -5,11 +5,20 @@ from home_back.models.weather import City, WeatherData, WeatherConfig
 class Weather(Resource):
     def get(self):
         # TODO: get all weather data from database
-        pass
+        cities = City.query.all()
+        
+        return {'cities': [ city.to_dict() for city in cities ]}, 201
 
-    def post(self, city_name):
+    def post(self):
         # TODO: save new City name
-        pass
+        data = request.get_json()
+
+        if data:
+            city = City(
+                city_name=data['city_name'],
+                country_code=data['country_code']
+            )
+
     def put(self, city_name):
         # TODO: save one new or update an existing city
         pass

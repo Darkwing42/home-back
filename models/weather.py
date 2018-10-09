@@ -56,6 +56,11 @@ class City(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+    
+    @classmethod
+    def get_by_name(cls, city_name):
+        return cls.query.filter_by(city_name=city_name).first()
+        
 
 class WeatherConfig(db.Model):
 
