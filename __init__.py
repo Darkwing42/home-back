@@ -5,21 +5,30 @@ from flask_migrate import Migrate
 #from flask_cors import CORS
 from flask_jwt import JWT
 
+from home_back.config.config import app_config
 
-app = Flask(__name__)
-app.config.from_object('home_back.config.BaseConfig')
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-api = Api(app)
+db = SQLAlchemy()
 
 
 
-#TODO: Generate secret key
 
-#import Resources
 
-from home_back.resources.weather import Weather, WeatherPrefs
-url_prefix = "/api/v1"
 
-api.add_resource(Weather, url_prefix + '/weather', url_prefix + '/weather/<string:city_name>')
-api.add_resource(WeatherPrefs, url_prefix + '/weather/config')
+def create_app(config_name):
+	app = Flask(__name__, instance_relative_config=True)
+	app.config.from_object(app_config[config_name])
+	db.init_app(app)
+	api = Api(app)
+	#TODO: Generate secret key
+
+	#import Resources
+
+	from home_back.resources.weather import Weather, WeatherPrefs
+	url_prefix = "/api/v1"
+
+	api.add_resource(Weather, url_prefix + '/weather', url_prefix + '/weather/<string:city_name>')
+	api.add_resource(WeatherPrefs, url_prefix + '/weather/config')
+
+	
+	return app
+	
